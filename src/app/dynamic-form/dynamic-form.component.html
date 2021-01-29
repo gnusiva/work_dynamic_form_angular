@@ -1,1 +1,20 @@
-<p>dynamic-form works!</p>
+<div class="row">
+  <div *ngFor="let field of fields" class="col-4" >
+
+    <mat-form-field appearance="outline"
+
+    *ngIf="
+    field.fieldType === 'text' ||
+    field.fieldType === 'number'
+    ">
+      <mat-label>Outline form field</mat-label>
+      <input matInput  type="{{field.fieldType}}" [formControl]="field.formControl" >
+      <mat-icon matSuffix class="successColor" *ngIf="field.formControl.valid && field.formControl.touched">check_circle</mat-icon>
+      <mat-icon matSuffix class="errorColor" *ngIf="!field.formControl.valid && field.formControl.touched">error</mat-icon>
+      <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+  </div>
+</div>
+
