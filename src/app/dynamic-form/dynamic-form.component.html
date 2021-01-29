@@ -2,12 +2,12 @@
   <div *ngFor="let field of fields" class="col-4" >
 
     <mat-form-field appearance="outline"
-
+    class="w-100"
     *ngIf="
     field.fieldType === 'text' ||
     field.fieldType === 'number'
     ">
-      <mat-label>Outline form field</mat-label>
+      <mat-label>{{field.displayLabel}}</mat-label>
       <input matInput  type="{{field.fieldType}}" [formControl]="field.formControl" >
       <mat-icon matSuffix class="successColor" *ngIf="field.formControl.valid && field.formControl.touched">check_circle</mat-icon>
       <mat-icon matSuffix class="errorColor" *ngIf="!field.formControl.valid && field.formControl.touched">error</mat-icon>

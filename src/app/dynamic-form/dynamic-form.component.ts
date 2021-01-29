@@ -23,9 +23,14 @@ export class DynamicFormComponent implements OnInit, OnChanges {
     if ( this.fields.length > 0) {
       this.fields.map( (item) => {
         item.formControl = new FormControl(item.value);
+        const validator = [];
         if ( item.required ) {
-          item.formControl.setValidators([Validators.required]);
+          validator.push(Validators.required);
         }
+        if ( item.validationRegex ) {
+          validator.push(Validators.pattern( new RegExp(item.validationRegex)));
+        }
+        item.formControl.setValidators(validator);
       });
     }
   }

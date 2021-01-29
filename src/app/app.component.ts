@@ -29,7 +29,7 @@ export interface DynamicFormInput {
   fieldType: DynamicFieldType;
   displayLabel: string;
   required?: boolean;
-  validationRegex?: string;
+  validationRegex?: any;
   validationLabel?: string;
   value: string;
   // formType: null;
@@ -52,8 +52,13 @@ export interface DynamicFormInput {
 })
 export class AppComponent {
 
+  emailRegex = '^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$';
+  simpleEmailRegex = '\\S+@\\S+\\.\\S+';
+
   dymanicFormInput: DynamicFormInput[] = [
-    { displayLabel: 'input', fieldType: 'text', value: 'asdf', required: true, validationLabel: 'Please enter name' },
+    { displayLabel: 'First Name', fieldType: 'text', value: 'asdf', required: true, validationLabel: 'Please enter name' },
+    { displayLabel: 'Email', fieldType: 'text', value: '', required: true, validationLabel: 'Please enter email',
+      validationRegex: this.simpleEmailRegex },
   ];
 
 }
