@@ -23,7 +23,13 @@ type DynamicFieldType =
 'text' |
 'time' |
 'url' |
-'week';
+'week' |
+'select';
+
+interface SelectOption {
+  label: string;
+  id: string;
+}
 export interface DynamicFormInput {
   field?: string;
   fieldType: DynamicFieldType;
@@ -31,7 +37,8 @@ export interface DynamicFormInput {
   required?: boolean;
   validationRegex?: any;
   validationLabel?: string;
-  value: string;
+  value: any;
+  options?: SelectOption[];
   // formType: null;
   // searchType: null;
   // country: null;
@@ -57,8 +64,19 @@ export class AppComponent {
 
   dymanicFormInput: DynamicFormInput[] = [
     { displayLabel: 'First Name', fieldType: 'text', value: 'asdf', required: true, validationLabel: 'Please enter name' },
+
+    { displayLabel: 'select one option', fieldType: 'checkbox', value: false, required: true, validationLabel: 'Please select checkbox' },
+
     { displayLabel: 'Email', fieldType: 'text', value: '', required: true, validationLabel: 'Please enter email',
       validationRegex: this.simpleEmailRegex },
+
+    { displayLabel: 'select one option', fieldType: 'select', value: null, required: true,
+      options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
+
+    { displayLabel: 'select one option', fieldType: 'radio', value: '', required: true, validationLabel: 'Please select one..',
+      options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
+
+
   ];
 
 }

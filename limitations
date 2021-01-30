@@ -1,0 +1,7 @@
+Limitations:
+checkbox does not have validation
+radio button has validation, but not from angular material. ( it is custom built )
+
+
+Questions:
+do we need hint?

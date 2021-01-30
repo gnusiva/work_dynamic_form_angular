@@ -1,20 +1,46 @@
-<div class="row">
-  <div *ngFor="let field of fields" class="col-4" >
+<div >
+  <form (submit)="onSubmit($event)" class="row">
+    <div *ngFor="let field of fields" class="col-12 col-md-4" >
 
-    <mat-form-field appearance="outline"
-    class="w-100"
-    *ngIf="
-    field.fieldType === 'text' ||
-    field.fieldType === 'number'
-    ">
-      <mat-label>{{field.displayLabel}}</mat-label>
-      <input matInput  type="{{field.fieldType}}" [formControl]="field.formControl" >
-      <mat-icon matSuffix class="successColor" *ngIf="field.formControl.valid && field.formControl.touched">check_circle</mat-icon>
-      <mat-icon matSuffix class="errorColor" *ngIf="!field.formControl.valid && field.formControl.touched">error</mat-icon>
-      <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
+      <mat-form-field appearance="outline"
+      class="w-100 mb-3"
+      *ngIf="
+      field.fieldType === 'text' ||
+      field.fieldType === 'number'
+      ">
+        <mat-label>{{field.displayLabel}}</mat-label>
+        <input matInput  type="{{field.fieldType}}" [formControl]="field.formControl" >
+        <mat-icon matSuffix class="successColor" *ngIf="field.formControl.valid && field.formControl.touched">check_circle</mat-icon>
+        <mat-icon matSuffix class="errorColor" *ngIf="!field.formControl.valid && field.formControl.touched">error</mat-icon>
+        <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
 
-  </div>
+
+      <mat-form-field appearance="outline"
+      class="w-100 mb-3"
+      *ngIf="field.fieldType === 'select'"
+      >
+        <mat-label>{{field.displayLabel}}</mat-label>
+        <mat-select [formControl]="field.formControl">
+          <mat-option *ngFor="let option of field.options" [value]="option.id">{{option.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <section
+      class="w-100 mb-3 d-flex flex-column"
+      *ngIf="field.fieldType === 'checkbox'">
+        <mat-checkbox [formControl]="field.formControl">{{field.displayLabel}}</mat-checkbox>
+      </section>
+
+      <mat-radio-group *ngIf="field.fieldType === 'radio'" class="d-flex flex-column" [formControl]="field.formControl">
+        <mat-label>{{field.displayLabel}}</mat-label>
+        <mat-radio-button *ngFor="let option of field.options" [value]="option.id">{{option.label}}</mat-radio-button>
+        <div class="text-danger" *ngIf="field.formControl.touched && field.formControl.invalid">{{field.validationLabel}}</div>
+      </mat-radio-group>
+
+    </div>
+    <button type="submit">submit</button>
+  </form>
 </div>
 

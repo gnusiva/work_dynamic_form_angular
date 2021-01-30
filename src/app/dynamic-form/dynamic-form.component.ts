@@ -35,4 +35,9 @@ export class DynamicFormComponent implements OnInit, OnChanges {
     }
   }
 
+  onSubmit(event): void {
+    event.preventDefault();
+    this.fields.forEach( item => item.formControl.markAsTouched());
+  }
+
 }
