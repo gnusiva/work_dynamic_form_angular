@@ -70,12 +70,15 @@ export class AppComponent {
     { displayLabel: 'Email', fieldType: 'text', value: '', required: true, validationLabel: 'Please enter email',
       validationRegex: this.simpleEmailRegex },
 
-    { displayLabel: 'select one option', fieldType: 'select', value: null, required: true,
+    { displayLabel: 'select one option', fieldType: 'select', value: null, required: true, validationLabel: 'Please select atleast one option.',
       options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
 
     { displayLabel: 'select one option', fieldType: 'radio', value: '', required: true, validationLabel: 'Please select one..',
       options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
 
+    { displayLabel: 'select a date', fieldType: 'date', value: '', required: true, validationLabel: 'Please select date.' },
+
+    { displayLabel: 'Enter a number', fieldType: 'number', value: '', required: true, validationLabel: 'Please select date.' },
 
   ];
 

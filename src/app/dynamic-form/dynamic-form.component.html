@@ -16,6 +16,13 @@
         <mat-hint>Hint</mat-hint>
       </mat-form-field>
 
+      <mat-form-field *ngIf="field.fieldType === 'date'" appearance="outline">
+        <mat-label>{{field.displayLabel}}</mat-label>
+        <input matInput [matDatepicker]="picker"  [formControl]="field.formControl" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
       <mat-form-field appearance="outline"
       class="w-100 mb-3"
@@ -25,6 +32,7 @@
         <mat-select [formControl]="field.formControl">
           <mat-option *ngFor="let option of field.options" [value]="option.id">{{option.label}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
       </mat-form-field>
 
       <section

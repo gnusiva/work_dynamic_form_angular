@@ -1,7 +1,8 @@
 Limitations:
 checkbox does not have validation
 radio button has validation, but not from angular material. ( it is custom built )
-
+date field can have start and end date to limit the calender
+number field can have min and max to limit the input number
 
 Questions:
 do we need hint?
