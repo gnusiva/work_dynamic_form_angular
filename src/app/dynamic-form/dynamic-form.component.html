@@ -1,5 +1,5 @@
-<div >
-  <form (submit)="onSubmit($event)" class="row">
+<div class="row" >
+
     <div *ngFor="let field of fields" class="col-12 col-md-4" >
 
       <mat-form-field appearance="outline"
@@ -19,7 +19,7 @@
 
       <mat-form-field *ngIf="field.fieldType === 'date'" appearance="outline">
         <mat-label>{{field.displayLabel}}</mat-label>
-        <input matInput [matDatepicker]="picker"  [formControl]="field.formControl" >
+        <input matInput [matDatepicker]="picker" (dateChange)="field.value = field.formControl.value" [formControl]="field.formControl" >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
         <mat-datepicker #picker></mat-datepicker>
@@ -30,7 +30,7 @@
       *ngIf="field.fieldType === 'select'"
       >
         <mat-label>{{field.displayLabel}}</mat-label>
-        <mat-select [formControl]="field.formControl">
+        <mat-select (selectionChange)="field.value = field.formControl.value" [formControl]="field.formControl">
           <mat-option *ngFor="let option of field.options" [value]="option.id">{{option.label}}</mat-option>
         </mat-select>
         <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
@@ -39,17 +39,17 @@
       <section
       class="w-100 mb-3 d-flex flex-column"
       *ngIf="field.fieldType === 'checkbox'">
-        <mat-checkbox [formControl]="field.formControl">{{field.displayLabel}}</mat-checkbox>
+        <mat-checkbox (change)="field.value = field.formControl.value" [formControl]="field.formControl">{{field.displayLabel}}</mat-checkbox>
       </section>
 
-      <mat-radio-group *ngIf="field.fieldType === 'radio'" class="d-flex flex-column" [formControl]="field.formControl">
+      <mat-radio-group *ngIf="field.fieldType === 'radio'" class="d-flex flex-column" (change)="field.value = field.formControl.value" [formControl]="field.formControl">
         <mat-label>{{field.displayLabel}}</mat-label>
         <mat-radio-button *ngFor="let option of field.options" [value]="option.id">{{option.label}}</mat-radio-button>
         <div class="text-danger" *ngIf="field.formControl.touched && field.formControl.invalid">{{field.validationLabel}}</div>
       </mat-radio-group>
 
     </div>
-    <button type="submit">submit</button>
-  </form>
+
+
 </div>
 

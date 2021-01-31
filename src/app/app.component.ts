@@ -82,4 +82,9 @@ export class AppComponent {
 
   ];
 
+  onSubmit(event): void {
+    event.preventDefault();
+    this.dymanicFormInput.forEach( item => item.formControl.markAsTouched());
+  }
+
 }

@@ -9,6 +9,7 @@ do we need hint? --- remove it.
 
 
 1. check box should have validation error.
-2. submit button on parent component.
+2. submit button on parent component. ---- done
 3. for email type should be email. ---- done
-4. storing the updated value back
+4. storing the updated value back ---- done
+5. overall validation error event
