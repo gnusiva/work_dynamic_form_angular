@@ -6,7 +6,8 @@
       class="w-100 mb-3"
       *ngIf="
       field.fieldType === 'text' ||
-      field.fieldType === 'number'
+      field.fieldType === 'number' ||
+      field.fieldType === 'email'
       ">
         <mat-label>{{field.displayLabel}}</mat-label>
         <input matInput  type="{{field.fieldType}}" (change)="field.value = field.formControl.value" [formControl]="field.formControl" >
