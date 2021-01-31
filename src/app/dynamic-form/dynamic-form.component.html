@@ -39,7 +39,9 @@
       <section
       class="w-100 mb-3 d-flex flex-column"
       *ngIf="field.fieldType === 'checkbox'">
+        <mat-label>{{field.displayLabel}}</mat-label>
         <mat-checkbox (change)="field.value = field.formControl.value" [formControl]="field.formControl">{{field.displayLabel}}</mat-checkbox>
+        <div class="text-danger" *ngIf="field.formControl.touched && field.formControl.invalid">{{field.validationLabel}}</div>
       </section>
 
       <mat-radio-group *ngIf="field.fieldType === 'radio'" class="d-flex flex-column" (change)="field.value = field.formControl.value" [formControl]="field.formControl">

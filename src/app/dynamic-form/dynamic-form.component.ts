@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { DynamicFormInput } from '../app.component';
 
@@ -29,6 +29,9 @@ export class DynamicFormComponent implements OnInit, OnChanges {
         }
         if ( item.validationRegex ) {
           validator.push(Validators.pattern( new RegExp(item.validationRegex)));
+        }
+        if ( item.required && item.fieldType === 'checkbox' ) {
+          validator.push( (control: AbstractControl) => control.value ? null : {required: false} );
         }
         item.formControl.setValidators(validator);
       });
