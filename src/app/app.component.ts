@@ -67,10 +67,10 @@ export class AppComponent {
 
     { displayLabel: 'select one option', fieldType: 'checkbox', value: false, required: true, validationLabel: 'Please select checkbox' },
 
-    { displayLabel: 'Email', fieldType: 'text', value: '', required: true, validationLabel: 'Please enter email',
+    { displayLabel: 'Enter Email', fieldType: 'email', value: '', required: true, validationLabel: 'Please enter email',
       validationRegex: this.simpleEmailRegex },
 
-    { displayLabel: 'select one option', fieldType: 'select', value: null, required: true, validationLabel: 'Please select atleast one option.',
+    { displayLabel: 'select one option', fieldType: 'select', value: '2', required: true, validationLabel: 'Please select atleast one option.',
       options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
 
     { displayLabel: 'select one option', fieldType: 'radio', value: '', required: true, validationLabel: 'Please select one..',

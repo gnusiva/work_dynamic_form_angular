@@ -9,7 +9,7 @@
       field.fieldType === 'number'
       ">
         <mat-label>{{field.displayLabel}}</mat-label>
-        <input matInput  type="{{field.fieldType}}" [formControl]="field.formControl" >
+        <input matInput  type="{{field.fieldType}}" (change)="field.value = field.formControl.value" [formControl]="field.formControl" >
         <mat-icon matSuffix class="successColor" *ngIf="field.formControl.valid && field.formControl.touched">check_circle</mat-icon>
         <mat-icon matSuffix class="errorColor" *ngIf="!field.formControl.valid && field.formControl.touched">error</mat-icon>
         <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>

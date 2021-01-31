@@ -1,6 +1,10 @@
 <div class="container">
   <div class="pt-3">
-    <app-dynamic-form [fields]="dymanicFormInput" ></app-dynamic-form>
+    <app-dynamic-form [(fields)]="dymanicFormInput"  ></app-dynamic-form>
+  </div>
+
+  <div *ngFor="let item of dymanicFormInput">
+    {{item | json}}
   </div>
 </div>
 

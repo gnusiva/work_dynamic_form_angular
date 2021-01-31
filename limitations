@@ -5,4 +5,10 @@ date field can have start and end date to limit the calender
 number field can have min and max to limit the input number
 
 Questions:
-do we need hint?
+do we need hint? --- remove it.
+
+
+1. check box should have validation error.
+2. submit button on parent component.
+3. for email type should be email.
+4. storing the updated value back
