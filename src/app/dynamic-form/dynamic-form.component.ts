@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { DynamicFormInput } from '../app.component';
+import { faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -12,6 +13,8 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
   @Input() fields: DynamicFormInput[] = [];
 
+  faCheckCircle = faCheckCircle;
+  faExclamationCircle = faExclamationCircle;
 
   constructor() { }
 
