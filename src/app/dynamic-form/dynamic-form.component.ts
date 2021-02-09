@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher, ThemePalette } from '@angular/material/core';
 import { DynamicFormInput } from '../app.component';
 import { faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -19,7 +20,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class DynamicFormComponent implements OnInit, OnChanges {
 
   @Input() fields: DynamicFormInput[] = [];
+  @Output() isAllValid = new EventEmitter();
   matcher = new MyErrorStateMatcher();
+  fg = new FormGroup({});
+  fgSubscription: Subscription;
 
   faCheckCircle = faCheckCircle;
   faExclamationCircle = faExclamationCircle;
@@ -31,6 +35,10 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+
+    if ( this.fgSubscription ) { this.fgSubscription.unsubscribe(); }
+    Object.keys(this.fg.controls).forEach( item => this.fg.removeControl(item));
+
     if ( this.fields.length > 0) {
       this.fields.map( (item) => {
         item.formControl = new FormControl(item.value);
@@ -45,7 +53,19 @@ export class DynamicFormComponent implements OnInit, OnChanges {
           validator.push( (control: AbstractControl) => control.value ? null : {required: false} );
         }
         item.formControl.setValidators(validator);
+        this.fg.addControl( 'n' + Math.random(), item.formControl);
       });
+
+      this.fgSubscription = this.fg.valueChanges.subscribe( (d) => {
+        let valid = true;
+        this.fields.forEach(element => {
+          if ( ! element.formControl.valid ){
+            valid = false;
+          }
+        });
+        this.isAllValid.emit(valid);
+      });
+
     }
   }
 

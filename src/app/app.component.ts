@@ -59,6 +59,8 @@ export interface DynamicFormInput {
 })
 export class AppComponent {
 
+  isAllValid = false;
+
   emailRegex = '^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$';
   simpleEmailRegex = '\\S+@\\S+\\.\\S+';
 
