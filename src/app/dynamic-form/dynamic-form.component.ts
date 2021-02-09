@@ -1,8 +1,15 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
+import { AbstractControl, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher, ThemePalette } from '@angular/material/core';
 import { DynamicFormInput } from '../app.component';
 import { faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return control && control.invalid;
+  }
+}
 
 @Component({
   selector: 'app-dynamic-form',
@@ -12,6 +19,7 @@ import { faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-
 export class DynamicFormComponent implements OnInit, OnChanges {
 
   @Input() fields: DynamicFormInput[] = [];
+  matcher = new MyErrorStateMatcher();
 
   faCheckCircle = faCheckCircle;
   faExclamationCircle = faExclamationCircle;

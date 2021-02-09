@@ -15,3 +15,9 @@
   position: absolute;
   right: 0;
 }
+
+//input outline color
+::ng-deep .green-border .mat-form-field-outline {
+  color: green !important;
+  // opacity: 1!important;
+}
