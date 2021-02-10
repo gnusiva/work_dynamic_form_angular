@@ -4,7 +4,7 @@
 
       <mat-form-field appearance="outline"
       class="w-100 mb-3 input-parent"
-      [ngClass]="{'green-border':field.formControl.valid}"
+      [ngClass]="{'green-border':field.formControl.value && field.formControl.valid}"
       *ngIf="
       field.fieldType === 'text' ||
       field.fieldType === 'number' ||
@@ -14,13 +14,13 @@
         <input matInput  type="{{field.fieldType}}" (change)="field.value = field.formControl.value" [formControl]="field.formControl" [errorStateMatcher]="matcher" >
         <!-- <mat-icon matSuffix class="successColor" *ngIf="field.formControl.valid && field.formControl.touched">check_circle</mat-icon> -->
         <!-- <mat-icon matSuffix class="errorColor" *ngIf="!field.formControl.valid && field.formControl.touched">error</mat-icon> -->
-        <fa-icon class="successColor input-icon" [icon]="faCheckCircle" *ngIf="field.formControl.valid "></fa-icon>
+        <fa-icon class="successColor input-icon" [icon]="faCheckCircle" *ngIf="field.formControl.value && field.formControl.valid "></fa-icon>
         <fa-icon class="errorColor input-icon" [icon]="faExclamationCircle" *ngIf="!field.formControl.valid "></fa-icon>
         <mat-error *ngIf="field.formControl.invalid">{{field.validationLabel}}</mat-error>
         <mat-hint>Hint</mat-hint>
       </mat-form-field>
 
-      <mat-form-field *ngIf="field.fieldType === 'date'" appearance="outline" [ngClass]="{'green-border':field.formControl.valid}">
+      <mat-form-field *ngIf="field.fieldType === 'date'" appearance="outline" [ngClass]="{'green-border':field.formControl.value && field.formControl.valid}">
         <mat-label>{{field.displayLabel}}</mat-label>
         <input matInput [matDatepicker]="picker" (dateChange)="field.value = field.formControl.value" [formControl]="field.formControl" [errorStateMatcher]="matcher" >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
