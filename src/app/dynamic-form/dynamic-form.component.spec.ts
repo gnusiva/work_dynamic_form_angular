@@ -70,14 +70,16 @@ describe('DynamicFormComponent', () => {
 
   });
 
-  it('should render input element in html with type attribute as text ', () => {
+  // For text field
+
+  it('for text field should render input element in html with type attribute as text ', () => {
     testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'text', value: 'asdf', required: true, validationLabel: 'Please enter name' }  ];
     testHostFixture.detectChanges();
     const compiled = testHostFixture.nativeElement;
     expect(compiled.getElementsByTagName('input')[0].type).toEqual('text');
   });
 
-  it('should render red color error msg and error icon if value is null and clicked outside ', () => {
+  it('for text field should render red color error msg and error icon if value is null and clicked outside ', () => {
     testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'text', value: null, required: true, validationLabel: 'Please enter name' }  ];
     testHostFixture.detectChanges();
     testHostComponent.mock[0].formControl.markAsTouched();
@@ -88,7 +90,7 @@ describe('DynamicFormComponent', () => {
     expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-exclamation-circle');
   });
 
-  it('should render green color tick icon if value is passed and clicked outside', () => {
+  it('for text field should render green color tick icon if value is passed and clicked outside', () => {
     testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'text', value: 'test value', required: true, validationLabel: 'Please enter name' }  ];
     testHostFixture.detectChanges();
     testHostComponent.mock[0].formControl.markAsTouched();
@@ -96,5 +98,76 @@ describe('DynamicFormComponent', () => {
     const compiled = testHostFixture.nativeElement;
     expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-check-circle');
   });
+
+  // For number field
+
+  it('for number field should render input element in html with type attribute as text ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'number', value: '123', required: true, validationLabel: 'Please enter name' }  ];
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('input')[0].type).toEqual('number');
+  });
+
+  it('for number field should render red color error msg and error icon if value is null and clicked outside ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'number', value: null, required: true, validationLabel: 'Please enter name' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('mat-error')[0]).toBeTruthy();
+    expect(compiled.getElementsByTagName('mat-error')[0].innerText).toEqual('Please enter name');
+    expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-exclamation-circle');
+  });
+
+  it('for number field should render green color tick icon if value is passed and clicked outside', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'number', value: '123', required: true, validationLabel: 'Please enter name' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-check-circle');
+  });
+
+  // For email field
+
+  it('for email field should render input element in html with type attribute as text ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'email', value: 'abc@abc.com', required: true, validationLabel: 'Please enter email' }  ];
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('input')[0].type).toEqual('email');
+  });
+
+  it('for email field should render red color error msg and error icon if value is null and clicked outside ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'email', value: null, required: true, validationLabel: 'Please enter email' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('mat-error')[0]).toBeTruthy();
+    expect(compiled.getElementsByTagName('mat-error')[0].innerText).toEqual('Please enter email');
+    expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-exclamation-circle');
+  });
+
+  it('for email field should render red color error msg and error icon if value is not a valid email and clicked outside ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'email', value: 'asdf', required: true, validationLabel: 'Please enter email', validationRegex: '\\S+@\\S+\\.\\S+' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('mat-error')[0]).toBeTruthy();
+    expect(compiled.getElementsByTagName('mat-error')[0].innerText).toEqual('Please enter email');
+    expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-exclamation-circle');
+  });
+
+  it('for email field should render green color tick icon if valid email is passed and clicked outside', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'email', value: 'abc@abc.com', required: true, validationLabel: 'Please enter email', validationRegex: '\\S+@\\S+\\.\\S+' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-check-circle');
+  });
+
+
 
 });
