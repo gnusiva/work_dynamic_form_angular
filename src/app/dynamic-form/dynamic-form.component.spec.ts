@@ -101,7 +101,7 @@ describe('DynamicFormComponent', () => {
 
   // For number field
 
-  it('for number field should render input element in html with type attribute as text ', () => {
+  it('for number field should render input element in html with type attribute as number ', () => {
     testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'number', value: '123', required: true, validationLabel: 'Please enter name' }  ];
     testHostFixture.detectChanges();
     const compiled = testHostFixture.nativeElement;
@@ -130,7 +130,7 @@ describe('DynamicFormComponent', () => {
 
   // For email field
 
-  it('for email field should render input element in html with type attribute as text ', () => {
+  it('for email field should render input element in html with type attribute as email ', () => {
     testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'email', value: 'abc@abc.com', required: true, validationLabel: 'Please enter email' }  ];
     testHostFixture.detectChanges();
     const compiled = testHostFixture.nativeElement;
@@ -168,6 +168,43 @@ describe('DynamicFormComponent', () => {
     expect(compiled.getElementsByTagName('fa-icon')[0].getElementsByTagName('svg')[0].className.baseVal).toContain('fa-check-circle');
   });
 
+  // For date field
+
+  it('for date field should render input element in html with type attribute as date ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'date', value: 'abc@abc.com', required: true, validationLabel: 'Please enter date' }  ];
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    // we are not keeping date field as date, because default date icon will overlap with material date icon
+    expect(compiled.getElementsByTagName('input')[0].type).toEqual('text');
+  });
+
+  it('for date field should render red color error msg and error icon if value is null and clicked outside ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'date', value: null, required: true, validationLabel: 'Please enter date' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('mat-error')[0]).toBeTruthy();
+    expect(compiled.getElementsByTagName('mat-error')[0].innerText).toEqual('Please enter date');
+  });
+
+  it('for date field should not render red color error icon if value is null and clicked outside ', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'date', value: null, required: true, validationLabel: 'Please enter date' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
+  });
+
+  it('for date field should not render green color tick icon if valid date is passed and clicked outside', () => {
+    testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'date', value: '01/01/2020', required: true, validationLabel: 'Please enter date' }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
+  });
 
 
 });
