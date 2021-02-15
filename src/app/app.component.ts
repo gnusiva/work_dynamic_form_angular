@@ -71,6 +71,8 @@ export class AppComponent {
 
     { displayLabel: 'select one option', fieldType: 'checkbox', value: false, required: true, validationLabel: 'Please select checkbox' },
 
+    { displayLabel: 'select one option', fieldType: 'checkbox', value: true, required: true, validationLabel: 'Please select checkbox' },
+
     { displayLabel: 'Enter Email', fieldType: 'email', value: '', required: true, validationLabel: 'Please enter email',
       validationRegex: this.simpleEmailRegex },
 

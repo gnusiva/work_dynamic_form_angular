@@ -248,7 +248,7 @@ describe('DynamicFormComponent', () => {
     expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
   });
 
-   // For radio field
+  // For radio field
 
   it('for radio field should render mat-select element', () => {
     testHostComponent.mock = [  { displayLabel: 'select one option', fieldType: 'radio', value: '', required: true, validationLabel: 'Please select one..',
@@ -282,6 +282,44 @@ describe('DynamicFormComponent', () => {
   it('for radio field should not render green color tick icon if valid date is passed and clicked outside', () => {
     testHostComponent.mock = [  { displayLabel: 'select one option', fieldType: 'radio', value: '', required: true, validationLabel: 'Please select one..',
                                 options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
+  });
+
+
+  // For checkbox field
+
+  it('for checkbox field should render mat-select element', () => {
+    testHostComponent.mock = [ { displayLabel: 'select one option', fieldType: 'checkbox', value: false, required: true, validationLabel: 'Please select checkbox' } ];
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('mat-radio-group')).toBeTruthy();
+  });
+
+  it('for checkbox field should render red color error msg and if value is null and clicked outside ', () => {
+    testHostComponent.mock = [ { displayLabel: 'select one option', fieldType: 'checkbox', value: false, required: true, validationLabel: 'Please select checkbox' } ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByClassName('text-danger')[0]).toBeTruthy();
+    expect(compiled.getElementsByClassName('text-danger')[0].innerText).toEqual('Please select checkbox');
+  });
+
+  it('for checkbox field should not render red color error icon if value is null and clicked outside ', () => {
+    testHostComponent.mock = [ { displayLabel: 'select one option', fieldType: 'checkbox', value: false, required: true, validationLabel: 'Please select checkbox' } ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
+  });
+
+  it('for checkbox field should not render green color tick icon if valid date is passed and clicked outside', () => {
+    testHostComponent.mock = [ { displayLabel: 'select one option', fieldType: 'checkbox', value: true, required: true, validationLabel: 'Please select checkbox' } ];
     testHostFixture.detectChanges();
     testHostComponent.mock[0].formControl.markAsTouched();
     testHostFixture.detectChanges();
