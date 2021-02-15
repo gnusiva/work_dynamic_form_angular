@@ -30,6 +30,7 @@
 
       <mat-form-field appearance="outline"
       class="w-100 mb-3"
+      [ngClass]="{'green-border':field.formControl?.value && field.formControl?.valid}"
       *ngIf="field.fieldType === 'select'"
       >
         <mat-label>{{field.displayLabel}}</mat-label>

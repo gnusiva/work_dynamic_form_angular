@@ -77,6 +77,9 @@ export class AppComponent {
     { displayLabel: 'select one option', fieldType: 'select', value: '2', required: true, validationLabel: 'Please select atleast one option.',
       options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
 
+    { displayLabel: 'select one option', fieldType: 'select', value: '', required: true, validationLabel: 'Please select atleast one option.',
+      options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
+
     { displayLabel: 'select one option', fieldType: 'radio', value: '', required: true, validationLabel: 'Please select one..',
       options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
 

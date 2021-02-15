@@ -178,7 +178,7 @@ describe('DynamicFormComponent', () => {
     expect(compiled.getElementsByTagName('input')[0].type).toEqual('text');
   });
 
-  it('for date field should render red color error msg and error icon if value is null and clicked outside ', () => {
+  it('for date field should render red color error msg if value is null and clicked outside ', () => {
     testHostComponent.mock = [  { displayLabel: 'First Name', fieldType: 'date', value: null, required: true, validationLabel: 'Please enter date' }  ];
     testHostFixture.detectChanges();
     testHostComponent.mock[0].formControl.markAsTouched();
@@ -206,5 +206,46 @@ describe('DynamicFormComponent', () => {
     expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
   });
 
+
+  // For select field
+
+  it('for select field should render mat-select element', () => {
+    testHostComponent.mock = [  { displayLabel: 'select one option', fieldType: 'select', value: '2', required: true, validationLabel: 'Please select atleast one option.',
+                                  options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] }  ];
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('mat-select')).toBeTruthy();
+  });
+
+  it('for select field should render red color error msg and if value is null and clicked outside ', () => {
+    testHostComponent.mock = [  { displayLabel: 'select one option', fieldType: 'select', value: '', required: true, validationLabel: 'Please select atleast one option.',
+                                  options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('mat-error')[0]).toBeTruthy();
+    expect(compiled.getElementsByTagName('mat-error')[0].innerText).toEqual('Please select atleast one option.');
+  });
+
+  it('for select field should not render red color error icon if value is null and clicked outside ', () => {
+    testHostComponent.mock = [  { displayLabel: 'select one option', fieldType: 'select', value: '', required: true, validationLabel: 'Please select atleast one option.',
+                                  options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
+  });
+
+  it('for select field should not render green color tick icon if valid date is passed and clicked outside', () => {
+    testHostComponent.mock = [  { displayLabel: 'select one option', fieldType: 'select', value: '2', required: true, validationLabel: 'Please select atleast one option.',
+                                  options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] }  ];
+    testHostFixture.detectChanges();
+    testHostComponent.mock[0].formControl.markAsTouched();
+    testHostFixture.detectChanges();
+    const compiled = testHostFixture.nativeElement;
+    expect(compiled.getElementsByTagName('fa-icon')[0]).toBeFalsy();
+  });
 
 });

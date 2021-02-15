@@ -72,7 +72,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, AfterViewInit , 
   ngAfterViewInit(): void {
     let valid = true;
     this.fields.forEach( item => {
-      if( !item.formControl.valid ) { valid = false; }
+      item.formControl.markAsTouched();
+      this.cdr.detectChanges();
+      if ( !item.formControl.valid ) { valid = false; }
     });
     this.isAllValid.emit(valid);
   }
