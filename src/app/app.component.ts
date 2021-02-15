@@ -83,6 +83,9 @@ export class AppComponent {
     { displayLabel: 'select one option', fieldType: 'radio', value: '', required: true, validationLabel: 'Please select one..',
       options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
 
+    { displayLabel: 'select one option', fieldType: 'radio', value: '3', required: true, validationLabel: 'Please select one..',
+      options: [{id: '1', label: 'option1'}, {id: '2', label: 'option2'}, {id: '3', label: 'option3'}] },
+
     { displayLabel: 'select a date', fieldType: 'date', value: '', required: true, validationLabel: 'Please select date.' },
 
     { displayLabel: 'select a date', fieldType: 'date', value: '', required: false, validationLabel: 'Please select date.' },
