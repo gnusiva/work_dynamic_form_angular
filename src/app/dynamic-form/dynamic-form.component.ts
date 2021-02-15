@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher, ThemePalette } from '@angular/material/core';
 import { DynamicFormInput } from '../app.component';
@@ -28,7 +28,7 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   faCheckCircle = faCheckCircle;
   faExclamationCircle = faExclamationCircle;
 
-  constructor() { }
+  constructor(public cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
@@ -55,7 +55,7 @@ export class DynamicFormComponent implements OnInit, OnChanges {
         item.formControl.setValidators(validator);
         this.fg.addControl( 'n' + Math.random(), item.formControl);
       });
-
+      this.cdr.detectChanges();
       this.fgSubscription = this.fg.valueChanges.subscribe( (d) => {
         let valid = true;
         this.fields.forEach(element => {
