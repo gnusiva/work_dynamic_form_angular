@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher, ThemePalette } from '@angular/material/core';
 import { DynamicFormInput } from '../app.component';
@@ -17,7 +17,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss']
 })
-export class DynamicFormComponent implements OnInit, OnChanges {
+export class DynamicFormComponent implements OnInit, OnChanges, AfterViewInit , OnDestroy {
 
   @Input() fields: DynamicFormInput[] = [];
   @Output() isAllValid = new EventEmitter();
@@ -69,9 +69,21 @@ export class DynamicFormComponent implements OnInit, OnChanges {
     }
   }
 
+  ngAfterViewInit(): void {
+    let valid = true;
+    this.fields.forEach( item => {
+      if( !item.formControl.valid ) { valid = false; }
+    });
+    this.isAllValid.emit(valid);
+  }
+
   onSubmit(event): void {
     event.preventDefault();
     this.fields.forEach( item => item.formControl.markAsTouched());
+  }
+
+  ngOnDestroy(): void {
+    if ( this.fgSubscription ) { this.fgSubscription.unsubscribe(); }
   }
 
 }
